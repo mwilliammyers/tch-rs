@@ -138,22 +138,12 @@ fn main() {
 
     compile(&libtorch);
 
-    let out_dir = env::var("OUT_DIR").unwrap();
-
-    println!("cargo:rustc-link-search=native={}", out_dir);
-    println!("cargo:rustc-link-lib=static=tch");
     println!("cargo:rustc-link-lib=torch");
     println!("cargo:rustc-link-lib=c10");
 
     let target = env::var("TARGET").unwrap();
 
-    if target.contains("apple") || target.contains("freebsd") || target.contains("openbsd") {
+    if !target.contains("msvc") {
         println!("cargo:rustc-link-lib=gomp");
-        println!("cargo:rustc-link-lib=c++");
-    } else if target.contains("linux") {
-        println!("cargo:rustc-link-lib=gomp");
-        println!("cargo:rustc-link-lib=stdc++");
-    } else if target.contains("msvc") {
-        println!("cargo:rustc-link-lib=iphlpapi");
     }
 }
