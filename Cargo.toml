@@ -23,9 +23,7 @@ zip = "0.5"
 cpython = { version = "0.2.0", optional = true }
 
 [workspace]
-members = [
-    "torch-sys",
-]
+members = ["torch-sys"]
 
 [features]
 python = ["cpython"]
